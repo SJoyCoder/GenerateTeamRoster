@@ -15,6 +15,18 @@ describe('Engineer', () => {
         });
         
     });
+
+    describe('getGithub', () => {
+
+        it('should retrun Engineer github', () => {
+
+            let newEngineer = new Engineer("Megan", 1, "megan@gmail.com", "github.com/megan");
+
+            expect(newEngineer.getGithub()).toEqual("github.com/megan");
+            
+        });        
+        
+    });
     
     describe('getRole', () => {
 

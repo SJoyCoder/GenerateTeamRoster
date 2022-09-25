@@ -7,12 +7,12 @@ describe('Employee', () => {
         it('should get initialized correctly', () => {
             //Arrange
             // Act
-            let newEmployee = new Employee("Sid", 1, "sid@gmail.com");
+            let newEmployee = new Employee("Tom", 1, "tom@gmail.com");
 
             // Assert
-            expect(newEmployee.name).toEqual("Sid");
+            expect(newEmployee.name).toEqual("Tom");
             expect(newEmployee.id).toEqual(1);
-            expect(newEmployee.email).toEqual("sid@gmail.com");
+            expect(newEmployee.email).toEqual("tom@gmail.com");
 
 
         });
@@ -24,10 +24,10 @@ describe('Employee', () => {
             
             //Arrange
             // Act
-            let newEmployee = new Employee("Sid", 1, "sid@gmail.com");   
+            let newEmployee = new Employee("Tom", 1, "tom@gmail.com");   
             
             // Assert
-            expect(newEmployee.getName()).toEqual("Sid");
+            expect(newEmployee.getName()).toEqual("Tom");
             
         });
     });
@@ -36,7 +36,7 @@ describe('Employee', () => {
         
         it('should return the Employee Id number', () => {
             
-            let newEmployee = new Employee("Sid", 1, "sid@gmail.com");   
+            let newEmployee = new Employee("Tom", 1, "tom@gmail.com");   
             
             expect(newEmployee.getId()).toEqual(1);
             
@@ -48,9 +48,9 @@ describe('Employee', () => {
     
         it('should return Employee email', () => {
     
-            let newEmployee = new Employee("Sid", 1, "sid@gmail.com");   
+            let newEmployee = new Employee("Tom", 1, "tom@gmail.com");   
             
-            expect(newEmployee.getEmail()).toEqual("sid@gmail.com");
+            expect(newEmployee.getEmail()).toEqual("tom@gmail.com");
                         
                 
         });
@@ -61,7 +61,7 @@ describe('Employee', () => {
 
         it('should return Employee', () => {
 
-            let newEmployee = new Employee("Sid", 1, "sid@gmail.com");   
+            let newEmployee = new Employee("Tom", 1, "tom@gmail.com");   
 
             expect(newEmployee.getRole()).toEqual("Employee");
             
