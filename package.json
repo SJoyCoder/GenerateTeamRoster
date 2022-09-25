@@ -18,5 +18,13 @@
   "dependencies": {
     "get": "^1.4.0",
     "inquirer": "8.2.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SJoyCoder/GenerateTeamRoster.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SJoyCoder/GenerateTeamRoster/issues"
+  },
+  "homepage": "https://github.com/SJoyCoder/GenerateTeamRoster#readme"
 }
