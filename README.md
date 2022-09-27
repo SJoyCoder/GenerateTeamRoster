@@ -1,6 +1,8 @@
 # GenerateTeamRoster
 
+![Page Screenshot](./dist/Screen%20Shot%202022-09-27%20at%203.19.22%20PM.png)
 
+[Click here for demonstration video](https://drive.google.com/file/d/1-18qKOBOBOzFDFRDz1gFcy5MRBAIJI0R/view?usp=sharing)
 
 ## About 
 This application builds a team roster in the console that will generate into an html document. The user will be asked a series of questions and their answers will populate the html. The user will start by making a Team Manager, then be asked to add and intern or engineer. After adding as many interns or engineers as deisired the user will choose the 'done' option and then their team roster will generate. 
