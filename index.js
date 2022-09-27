@@ -1,8 +1,16 @@
 const inquirer = require("inquirer");
 const fs = require('fs');
+const Manager = require('./lib/Manager')
+const Engineer = require('./lib/Engineer')
+const Intern = require('./lib/Intern')
+const employeeArray = [];
+const {HTMLContent:managerHTMLContent, managerQuestions} = require("./src/managerInput");
+const {HTMLContent:engineerHTMLContent, engineerQuestions} = require("./src/engineerInput");
+const {HTMLContent:internHTMLContent, internQuestions} = require("./src/internInput");
+const employeeHTMLArray = [];
 
     
-    const HTMLContent = ({ managerName, managerId, managerEmail, officeNumber }) =>
+const HTMLContent = (header) => 
     `<!DOCTYPE html>
     <html lang="en">
     <head>
@@ -21,80 +29,71 @@ const fs = require('fs');
     </div>
     </nav>
     </header>
-    
-    <div class="row row-cols-1 row-cols-md-3 g-3">
-    <div class="col">
-    <div class="card m-4" style="width: 18rem;" id="managerCard">
-    <div class="card-header" style="background-color: #0177f7; color: white;">
-    <h2 id="managerNameSection">${managerName}</h2>
-    <br>
-    <h3 id="managerRoleSection">Manager</h3>
-    </div>
-    <div class="card-body">
-    <ul class="list-group list-group-flush">
-    <li class="list-group-item" id="managerIdSection">ID: ${managerId}</li>
-    <li class="list-group-item" id="managerEmailSection">Email: ${managerEmail}</li>
-    <li class="list-group-item" id="officeNumberSection">Office Number: ${officeNumber}</li>
-    </ul>
-    </div>
-    </div>
-    </div>
-    
 
-    </div>
-    
-    
-    
+<section>    
+${header}
+
+</section>    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     
     </body>
     </html>`;
+ 
+
     
-    inquirer
-        .prompt([
-            {
-                type: "input",
-                name: "managerName",
-                message: "Please input Team Manager's name."
-            },
-            {
-                type: "number",
-                name: "managerId",
-                message: "Please input Team Manager's Employee Id."
-            },
-            {
-                type: "input",
-                name: "managerEmail",
-                message: "Please input Team Manager's email."
-            }, 
-            {
-                type: "number",
-                name: "officeNumber",
-                message: "Please input Team Manager's office number."
-            },
-            {
-                type: "list",
-                name: "employeeType",
-                message: "Do you want to input an Engineer or an Intern?",
-                choices: ["Engineer", "Intern", "Not Right Now"]
-            }
-        ])        
-        .then((answers) => {
-            const htmlPageContent = HTMLContent(answers); 
-
-            if(employeeType === "Engineer"){
-
-
-            }else if(employeeType === "Intern"){
-                
-
-            }else{
-
-
-            }
+ managerQuestions()
+ .then((managerData) => {
+    let newManager = new Manager(managerData.name, managerData.id, managerData.email, managerData.officeNumber);
+    employeeArray.push(newManager);
+    console.log("HELLO")
+    nextEmployee(managerData.employeeType);
+});
+ function nextEmployee(employeeType){
+    if(employeeType === "Engineer"){
+        engineerQuestions()
+        .then((engineerData) => {
+            let newEngineer = new Engineer(engineerData.name, engineerData.id, engineerData.email, engineerData.github);
+            employeeArray.push(newEngineer);
+            nextEmployee(engineerData.employeeType);
+        })
+    }else if(employeeType === "Intern"){
+        internQuestions()
+        .then((internData) => {
+            let newIntern = new Intern(internData.name, internData.id, internData.email, internData.school);
+            employeeArray.push(newIntern);
+            nextEmployee(internData.employeeType);
+        })
+    }else if(employeeType === "Done"){
+            for (let i = 0; i < employeeArray.length; i++) {
+               if(employeeArray[i].getRole() === "Manager"){
+                employeeHTMLArray.push(managerHTMLContent(employeeArray[i]));
+               }else if(employeeArray[i].getRole() === "Engineer"){
+                employeeHTMLArray.push(engineerHTMLContent(employeeArray[i]));
+               }else if(employeeArray[i].getRole() === "Intern"){
+                employeeHTMLArray.push(internHTMLContent(employeeArray[i]));
+               }
             
+            }
+            const htmlPageContent = HTMLContent(employeeHTMLArray); 
+    
             fs.writeFile("./renderedHTML.HTML", htmlPageContent, (err) =>
             err ? console.log(err) : console.log("Successfully created HTML")
             );
-            console.table(answers);
-        })
+            console.log(employeeHTMLArray);
+    }
+
+    
+}
+
+// function finishRoster(employeeType){
+//     if(employeeType === "Done"){
+//         .then((answers) => {
+//             const htmlPageContent = HTMLContent(answers); 
+    
+//             fs.writeFile("./renderedHTML.HTML", htmlPageContent, (err) =>
+//             err ? console.log(err) : console.log("Successfully created HTML")
+//             );
+//             console.table(answers);
+//         })
+
+//     }
