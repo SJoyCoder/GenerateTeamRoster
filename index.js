@@ -76,7 +76,7 @@ ${header}
             }
             const htmlPageContent = HTMLContent(employeeHTMLArray); 
     
-            fs.writeFile("./renderedHTML.HTML", htmlPageContent, (err) =>
+            fs.writeFile("./renderedHTML.html", htmlPageContent, (err) =>
             err ? console.log(err) : console.log("Successfully created HTML")
             );
             console.log(employeeHTMLArray);
@@ -84,16 +84,3 @@ ${header}
 
     
 }
-
-// function finishRoster(employeeType){
-//     if(employeeType === "Done"){
-//         .then((answers) => {
-//             const htmlPageContent = HTMLContent(answers); 
-    
-//             fs.writeFile("./renderedHTML.HTML", htmlPageContent, (err) =>
-//             err ? console.log(err) : console.log("Successfully created HTML")
-//             );
-//             console.table(answers);
-//         })
-
-//     }
